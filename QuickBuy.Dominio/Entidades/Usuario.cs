@@ -13,7 +13,7 @@ namespace QuickBuy.Dominio.Entidades
         /// Um usuário poder ter um ou muitos pedidos
         /// Esse tipo de dado é novo, não usei ele até agora.
         /// </summary>
-        public ICollection<Pedido> Pedidos { get; set; }
+        public virtual ICollection<Pedido> Pedidos { get; set; }
 
         public override void Validate()
         {
