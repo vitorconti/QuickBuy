@@ -8,6 +8,8 @@ namespace QuickBuy.Repositorio.Config
     {
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
+            
+            
             //id 
             builder.HasKey(u => u.Id);
             //has key é o metodo que define a chave primária
