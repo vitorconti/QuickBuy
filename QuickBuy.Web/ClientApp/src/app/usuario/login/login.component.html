@@ -8,14 +8,45 @@
     <input type="email" id="inputEmail" name="email"
            placeholder="Informe seu e-mail"
            class="form-control mb-2"
-           [(ngModel)]="usuario.email"/>
+           [ngClass]="{
+           'is-invalid' :email.invalid && (email.dirty || email.touched),
+           'is-valid' : email.valid 
+           }"
+           [(ngModel)]="usuario.email"
+           #email="ngModel"
+           email
+           required />
+    <!-- validações do campo de e-mail-->
+    <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email.errors.required">
+        Email deve deve ser preenchido
+      </div>
+      <div *ngIf="email.errors.email">
+        Formato de email inválido
+      </div>
+    </div>
 
     <label for="inputSenha" class="sr-only">Senha</label>
     <input type="password" id="inputSenha" name="senha"
            placeholder="Senha"
            class="form-control mb-2"
-           [(ngModel)]="usuario.senha"/>
+           [ngClass]="{
+           'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+           'is-valid': senha.valid
+           }"
+           [(ngModel)]="usuario.senha" 
+           #senha="ngModel"
+           required
+           />
+    <div class="invalid-feedback mb-2" *ngIf="senha.invalid && (senha.dirty || senha.touched)">
+      <div *ngIf="email.errors.required">
+        Senha obrigatória
+      </div>
+    </div>
+    <!--Validações do campo de senha-->
     <button class="btn btn-primary btn-block" (click)="entrar ()" type="submit">Entrar</button>
+    <img [src]="imgsrc" />
   </form>
-  <img [src]="imgsrc"/>
+  
+
 </div>
