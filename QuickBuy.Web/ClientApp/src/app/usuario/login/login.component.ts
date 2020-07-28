@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { templateJitUrl } from "@angular/compiler";
 import { Usuario } from "../../modelo/usuario";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
+import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 
 @Component({
   selector: "app-login",
@@ -9,19 +10,34 @@ import { Router } from "@angular/router";
   styleUrls: ["./login.component.css"]
 
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public usuario
-  public usuarioAutenticado: boolean;
-  public usuarios = ["usuario1", "usuario2", "usuario3", "usuario4", "usuario5"];
-  constructor( private router: Router) {
+  public returnUrl: string;
+  constructor( private router: Router, private activatedRouter: ActivatedRoute, private usuarioServico: UsuarioServico) {
     this.usuario = new Usuario();
+    
+  }
+  ngOnInit(): void {
+    this.returnUrl = this.activatedRouter.snapshot.queryParams['returnUrl'];
   }
   entrar() {
+
+    this.usuarioServico.verificarUsuario(this.usuario).subscribe(
+      data => {
+      },
+      err => {
+
+      }
+      
+    )
+    
+      ;
+    /*
     if (this.usuario.email == "teste@teste.com" && this.usuario.senha == "123")
-      sessionStorage.setItem("usuario-autenticado","1");
-      //localStorage.setItem("usuario-autenticado", "1");
-      this.router.navigate(['/'])
-  }
+      sessionStorage.setItem("usuario-autenticado", "1");
+      this.router.navigate([this.returnUrl])
+*/
+}
   public imgsrc = "../assets/img/quic-logo2.jpg";
 
 }
