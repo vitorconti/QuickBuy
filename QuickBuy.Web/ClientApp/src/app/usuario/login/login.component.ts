@@ -13,30 +13,43 @@ import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 export class LoginComponent implements OnInit {
   public usuario
   public returnUrl: string;
+  public mensagem: string;
   constructor( private router: Router, private activatedRouter: ActivatedRoute, private usuarioServico: UsuarioServico) {
     this.usuario = new Usuario();
     
   }
   ngOnInit(): void {
     this.returnUrl = this.activatedRouter.snapshot.queryParams['returnUrl'];
+    this.usuario = new Usuario(); 
   }
   entrar() {
 
     this.usuarioServico.verificarUsuario(this.usuario).subscribe(
-      data => {
+      usuario_json => {
+        console.log(usuario_json);
+        //essa linha sera executada em caso de retornos sem erro
+        this.usuarioServico.usuario = usuario_json;
+
+        if (this.returnUrl == null) {
+          this.router.navigate(['/']);
+        }
+
+        else {
+          this.router.navigate([this.returnUrl]);
+        }
+
+
       },
       err => {
-
+        console.log(err.error);
+        this.mensagem = err.error;
       }
       
+      
     )
-    
-      ;
-    /*
-    if (this.usuario.email == "teste@teste.com" && this.usuario.senha == "123")
-      sessionStorage.setItem("usuario-autenticado", "1");
-      this.router.navigate([this.returnUrl])
-*/
+    alert(this.mensagem);
+
+
 }
   public imgsrc = "../assets/img/quic-logo2.jpg";
 

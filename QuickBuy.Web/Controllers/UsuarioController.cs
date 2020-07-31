@@ -3,9 +3,9 @@ using QuickBuy.Dominio.Entidades;
 using System;
 
 namespace QuickBuy.Web.Controllers
-{
+{   [Route("api/[controller]")]
     public class UsuarioController : Controller
-    {
+{   
         [HttpPost]
         public ActionResult Post()
         {
@@ -34,7 +34,7 @@ namespace QuickBuy.Web.Controllers
             catch (Exception ex)
             {
 
-                return BadRequest("" + ex.Message);
+                return BadRequest("caiu na bad request aqui" + ex.Message);
             }
         }
     }
