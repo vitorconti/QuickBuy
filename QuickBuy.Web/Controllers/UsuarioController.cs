@@ -1,11 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuickBuy.Dominio.Contratos;
 using QuickBuy.Dominio.Entidades;
 using System;
 
 namespace QuickBuy.Web.Controllers
-{   [Route("api/[controller]")]
+{   [Route("api/[Controller]")]
     public class UsuarioController : Controller
-{   
+{
+        private readonly IUsuarioRepositorio _usuarioRepositorio;
+        public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
+        {
+            _usuarioRepositorio = usuarioRepositorio;
+        }
+        public ActionResult Get()
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+
+                throw;
+            }
+        }
         [HttpPost]
         public ActionResult Post()
         {
@@ -16,25 +35,25 @@ namespace QuickBuy.Web.Controllers
             catch (Exception ex)
             {
 
-                return BadRequest(""+ ex.Message);
+                return BadRequest(""+ ex.ToString());
             }
         }
-        [HttpPost("VerificaUsuario")]
-        public ActionResult VerificaUsuario([FromBody] Usuario usuario)
+        [HttpPost("VerificarUsuario")]
+        public ActionResult VerificarUsuario([FromBody] Usuario usuario)
         {
             try
             {
-                if(usuario.Email== "teste@teste.com" && usuario.Senha== "123")
-                { 
+                var usuarioRetorno = _usuarioRepositorio.Obter(usuario.Email,usuario.Senha);
+                if(usuarioRetorno != null)
                     //Nessa linha aqui, alem de retornar o Ok(), também é retornado o usuário convertido de volta para o json
-                    return Ok(usuario); 
-                }
+                    return Ok(usuarioRetorno); 
+                
                 return BadRequest("Usuário ou senha inválido");
             }
             catch (Exception ex)
             {
 
-                return BadRequest("caiu na bad request aqui" + ex.Message);
+                return BadRequest("caiu na bad request aqui" + ex.ToString());
             }
         }
     }

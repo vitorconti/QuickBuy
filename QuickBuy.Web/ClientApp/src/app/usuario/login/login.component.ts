@@ -14,16 +14,18 @@ export class LoginComponent implements OnInit {
   public usuario
   public returnUrl: string;
   public mensagem: string;
+  private ativar_spinner: boolean;
   constructor( private router: Router, private activatedRouter: ActivatedRoute, private usuarioServico: UsuarioServico) {
-    this.usuario = new Usuario();
+    
+   
     
   }
   ngOnInit(): void {
     this.returnUrl = this.activatedRouter.snapshot.queryParams['returnUrl'];
-    this.usuario = new Usuario(); 
+    this.usuario = new Usuario();
   }
   entrar() {
-
+    this.ativar_spinner = true;
     this.usuarioServico.verificarUsuario(this.usuario).subscribe(
       usuario_json => {
         console.log(usuario_json);
@@ -42,13 +44,13 @@ export class LoginComponent implements OnInit {
       },
       err => {
         console.log(err.error);
+        console.log(sessionStorage.getItem("usuario-autenticado"));
         this.mensagem = err.error;
+        this.ativar_spinner = false;
       }
       
       
     )
-    alert(this.mensagem);
-
 
 }
   public imgsrc = "../assets/img/quic-logo2.jpg";

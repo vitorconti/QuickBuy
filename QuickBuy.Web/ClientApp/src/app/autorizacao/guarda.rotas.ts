@@ -19,7 +19,7 @@ export class GuardaRotas implements CanActivate {
     
     this.router.navigate(['/entrar'], { queryParams: {returnUrl: state.url} });
         // se usurio autenticado
-      return true;
+      return false;
     }
    
 

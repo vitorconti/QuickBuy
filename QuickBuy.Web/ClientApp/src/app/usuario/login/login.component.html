@@ -44,9 +44,11 @@
       </div>
     </div>
     <!--Validações do campo de senha-->
-    <button class="btn btn-primary btn-block" (click)="entrar ()" type="submit">Entrar</button>
-    <div class="alert alert-danger mb-2" *ngIf="mensagem">
-      <h1>teste</h1>
+    <button class="btn btn-primary btn-block" (click)="entrar ()" type="submit" [disabled]="ativar_spinner">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+      Entrar
+    </button>
+    <div class="alert alert-danger mb-2" role="alert" *ngIf="mensagem">
       {{mensagem}}
     </div>
     <img [src]="imgsrc" />
