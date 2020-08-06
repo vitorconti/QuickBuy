@@ -1,0 +1,91 @@
+<h1 class="h4 titulo mb-2">Cadastro de produto</h1>
+
+<!--input nome-->
+<label for="inputNome" class="sr-only">Nome produto</label>
+<input
+       type="text" id="inputNome"
+       name="nomeProduto"
+       placeholder="Nome do Produto"
+       class="form-control mb-2 col-md-4"
+       required
+       [ngClass]="{
+       'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+       'is-valid': nome.valid && (nome.dirty || nome.touched)
+       }"
+       [(ngModel)]="produto.nome"
+       #nome="ngModel" />
+<div class="invalid-feedback mb-2" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+  <div class="space-left" *ngIf="nome.errors.required">
+    Nome do produto é um campo obrigatório
+  </div>
+</div>
+<!--input descricao-->
+<label for="inputDescricao" class="sr-only">Descricao produto</label>
+<input
+       type="text"
+       id="inputDescricao"
+       placeholder="Descrição do produto"
+       required
+       class="form-control mb-2 col-md-4"
+       [ngClass]="{
+       'is-invalid': descricao.invalid && (descricao.dirty || descricao.touched),
+       'is-valid': descricao.valid && (descricao.dirty || descricao.touched)
+       }"
+       [(ngModel)]="produto.descricao"
+       #descricao="ngModel"
+/>
+<div class="invalid-feedback mb-2" *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)">
+  <div class="space-left" *ngIf="descricao.errors.required">
+    Descrição do produto é um campo obrigatório
+  </div>
+</div>
+<!--input preco-->
+<label for="inputPreco" class="sr-only">Preco do produto</label>
+<input
+       type="number"
+       id="inputPreco"
+       placeholder="Preço do produto"
+       required
+       class="form-control mb-2 col-md-2"
+       [ngClass]="{
+       'is-invalid': preco.invalid && (preco.dirty || preco.touched),
+       'is-valid': preco.valid && (preco.dirty || preco.touched)
+       }"
+       [(ngModel)]="produto.preco"
+       #preco="ngModel"
+/>
+<div class="invalid-feedback mb-2" *ngIf="preco.invalid && (preco.dirty || preco.touched)">
+  <div class="space-left" *ngIf="preco.errors.required">
+    Preço do produto é um campo obrigatório
+  </div>
+</div>
+<div class="input-group">
+  <div class="custom-file mb-2 col-md-4">
+    <input type="file" class="custom-file-input" id="inputFile" (change)="inputChange($event.target.files)">
+    <label class="custom-file-label" for="inputFile">Escolha uma foto para o produto </label>
+  </div>
+  </div>
+<button class="btn btn-primary mb-2" (click)="cadastrar()" [disabled]="ativar_spinner">
+  <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"></span>
+  Cadastrar
+</button>
+
+<div class="alert alert-success col-md-4" role="alert" *ngIf="mensagemRetornoSucesso">
+  {{mensagemRetornoSucesso}}
+</div>
+<div class="alert alert-danger col-md-4" role="alert" *ngIf="mensagemRetorno">
+  {{mensagemRetorno}}
+</div>
+
+<!--
+ A funcionalidade do [ngClass] permite que seja manipulado através de programação o comportamento das folhas de estilo
+ (classes vindas do arquivo .css). Então é possivel alterar o comportamento conforme o preetendido na criação do template
+      
+ a sintaxe de binding [(ngMode)], como o próprio nome sugere, fará referencia a uma propriedade descrita classe modelo, essa clase modelo,
+ por sua vez está instanciada dentro do arquivo de typescript correspondente a este componente, no caso produto.component.ts
+
+
+
+A sintaxe de atribuição de variavel de template: #nomedavariavel, serve para q seja possível armazenar, com base na definição do modelo [(ngModel)]
+ o valor para a propriedade declarada dentro do ngModel
+-->

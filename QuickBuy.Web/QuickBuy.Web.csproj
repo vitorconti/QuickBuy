@@ -29,6 +29,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\arquivos\FOFOCAFOFO.png" />
+    <Content Remove="wwwroot\arquivos\FOFOCAFOFO_202083232445.png" />
+    <Content Remove="wwwroot\arquivos\FOFOCAFOFO_20208323746.png" />
+    <Content Remove="wwwroot\arquivos\Motorolaon_202084221520.webp" />
+    <Content Remove="wwwroot\arquivos\Motorolaon_202084221651.webp" />
+    <Content Remove="wwwroot\arquivos\Motorolaon_202084221831.webp" />
+    <Content Remove="wwwroot\arquivos\Motorolaon_202084222626.webp" />
+    <Content Remove="wwwroot\arquivos\Motorolaon_202084222844.webp" />
+    <Content Remove="wwwroot\arquivos\Sem-título.png" />
+    <Content Remove="wwwroot\arquivos\WhatsApp-I_20208422171.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\dist\3rdpartylicenses.txt" />
     <None Remove="ClientApp\dist\assets\img\quic-logo.jfif" />
     <None Remove="ClientApp\dist\assets\img\quic-logo2.jpg" />
@@ -52,10 +65,12 @@
     <None Remove="ClientApp\dist\vendor.js" />
     <None Remove="ClientApp\dist\vendor.js.map" />
     <None Remove="ClientApp\src\app\autorizacao\guarda.rotas.ts" />
+    <None Remove="ClientApp\src\app\modelo\produto.ts" />
     <None Remove="ClientApp\src\app\modelo\usuario.ts" />
     <None Remove="ClientApp\src\app\produto\produto.component.ts" />
     <None Remove="ClientApp\src\app\servicos\produto\produto.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\usuario\usuario.servico.ts" />
+    <None Remove="ClientApp\src\app\usuario\cadastro\cadastro.usuario.component.ts" />
     <None Remove="ClientApp\src\app\usuario\login\login.component.ts" />
   </ItemGroup>
 
@@ -65,10 +80,12 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\autorizacao\guarda.rotas.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\produto.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\usuario.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\produto\produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produto.servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\usuario\usuario.servico.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\usuario\cadastro\cadastro.usuario.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\usuario\login\login.component.ts" />
   </ItemGroup>
 
@@ -79,7 +96,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\usuario\cadastro\" />
+    <Folder Include="wwwroot\arquivos\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,0 +1,17 @@
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: "Selecionar";
+}
+.titulo{
+    color: #666;
+}
+.invalid-feedback{
+    display:block;
+}
+
+.valid-feedback {
+  display: block;
+}
+.space-left {
+  margin-left: 5px;
+}
+
