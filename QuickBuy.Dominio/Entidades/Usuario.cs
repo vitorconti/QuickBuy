@@ -9,6 +9,7 @@ namespace QuickBuy.Dominio.Entidades
         public string Senha { get; set; }
         public string Nome { get; set; }
         public string SobreNome { get; set; }
+        public bool EhAdministrador { get; set; }
         /// <summary>
         /// Um usuário poder ter um ou muitos pedidos
         /// Esse tipo de dado é novo, não usei ele até agora.

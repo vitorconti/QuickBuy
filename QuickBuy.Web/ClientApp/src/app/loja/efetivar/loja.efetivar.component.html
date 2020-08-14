@@ -20,13 +20,14 @@
               {{p.descricao}}
             </td>
             <td style="width: 10%;">
-              <input type="number" class="form-control" value="1"(change)="atualizarPreco(p,$event.target.value)"/>
+              <input type="number" class="form-control" value="1"(change)="atualizarPreco(p,$event.target.value)"
+                     [(ngModel)]="p.quantidade" placeholder="1"/>
             </td>
             <td style="width: 30%;">
               R$ {{p.preco | number:'1.0-2'}}
             </td>
             <td>
-              <button (click)="removerProduto()" class="btn btn-secondary btn-sm">Remover</button>
+              <button (click)="removerProduto(p)" class="btn btn-secondary btn-sm">Remover</button>
             </td>
           </tr>
         </tbody>
@@ -42,10 +43,10 @@
             <table class="mb-4">
             <tr>
               <td style="width:70%;"><strong>Total:</strong></td>
-              <td><strong>R$ 1300.00</strong></td>
+              <td><strong>R$ {{total | number:'1.0-2'}}</strong></td>
             </tr>
             </table>
-            <button class="btn btn-danger">Efetiva Compra</button>
+            <button class="btn btn-danger"style="width:100%;">Efetiva Compra</button>
           </div>
         </div>
       </div>
