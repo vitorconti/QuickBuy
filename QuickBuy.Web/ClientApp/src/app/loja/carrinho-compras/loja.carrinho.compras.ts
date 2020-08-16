@@ -19,6 +19,7 @@ export class LojaCarrinhoCompras {
     var produtoLocalStorage = localStorage.getItem("produtoLocalStorage");
     if (produtoLocalStorage)
       return JSON.parse(produtoLocalStorage);
+    return this.produtos;
   }
   public removerProduto(produto: Produto) {
     var produtoLocalStorage = localStorage.getItem("produtoLocalStorage");
@@ -30,5 +31,12 @@ export class LojaCarrinhoCompras {
   }
   public atualizar(produtos: Produto[]) {
     localStorage.setItem("produtoLocalStorage", JSON.stringify(produtos));
+  }
+  public temItensNoCarrinhoDeCompras() {
+    var itens = this.obterProdutos()
+    return (itens.length > 0);
+  }
+  limparCarrinhoCompras() {
+    localStorage.setItem("produtoLocalStorage", "");
   }
 }

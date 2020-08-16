@@ -3,7 +3,7 @@
     <div class="container">
       <a class="navbar-brand" [routerLink]='["/"]'>QuickBuy</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
+              [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
@@ -27,10 +27,11 @@
               <li class="dropdown-item" role="menu" [routerLink]='["/sair"]' (click)="sair()">Sair</li>
             </ul>
           </li>
-          <!--<li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioLogado()">
-    <a class="nav-item nav-link text-dark" [routerLink]='[""]' (click)="sair()">Sair</a>
-  </li>-->
-
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="temItensNoCarrinhoDeCompras()">
+            <a class="nav-link text-dark" [routerLink]='["/loja-efetivar"]'>
+              <img style="width:32px; height: 32px;" src="../../assets/img/shoppingcart_86089.png"/>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

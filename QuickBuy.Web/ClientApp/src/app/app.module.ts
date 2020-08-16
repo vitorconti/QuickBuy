@@ -11,7 +11,6 @@ import { ProdutoComponent } from './produto/produto.component';
 import { PesquisaProdutoComponent } from './produto/pesquisa/pesquisa.produto.component';
 import { LoginComponent } from './usuario/login/login.component';
 import { GuardaRotas } from './autorizacao/guarda.rotas';
-
 import { UsuarioServico } from './servicos/usuario/usuario.servico';
 import { CadastroUsuarioComponent } from './usuario/cadastro/cadastro.usuario.component';
 import { CastExpr } from '@angular/compiler';
@@ -19,6 +18,8 @@ import { ProdutoServico } from './servicos/produto/produto.servico';
 import { LojaPesquisaComponent } from './loja/pesquisa/loja.pesquisa.component';
 import { LojaDetalheProdutoComponent } from './loja/detalheproduto/loja.detalhe.produto.component';
 import { LojaEfetivarComponent } from './loja/efetivar/loja.efetivar.component';
+import { PedidoServico } from './servicos/pedido/pedido.servico';
+import { LojaCompraRealizadaComponent } from './loja/efetivar/loja.compra.realizada.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LojaEfetivarComponent } from './loja/efetivar/loja.efetivar.component';
     PesquisaProdutoComponent,
     LojaPesquisaComponent,
     LojaDetalheProdutoComponent,
-    LojaEfetivarComponent
+    LojaEfetivarComponent,
+    LojaCompraRealizadaComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,10 +47,11 @@ import { LojaEfetivarComponent } from './loja/efetivar/loja.efetivar.component';
       { path: 'novo-usuario', component: CadastroUsuarioComponent },
       { path: 'pesquisar-produto', component: PesquisaProdutoComponent, canActivate: [GuardaRotas] },
       { path: 'loja-detalhe-produto', component: LojaDetalheProdutoComponent },
-      { path: 'loja-efetivar', component: LojaEfetivarComponent, canActivate: [GuardaRotas] }
+      { path: 'loja-efetivar', component: LojaEfetivarComponent, canActivate: [GuardaRotas] },
+      { path: 'compra-realizada-sucesso', component: LojaCompraRealizadaComponent, canActivate: [GuardaRotas] }
     ])
   ],
-  providers: [UsuarioServico,ProdutoServico],
+  providers: [UsuarioServico,ProdutoServico, PedidoServico],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
