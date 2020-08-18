@@ -4,7 +4,7 @@
     <div class="col-md-4 mb-4" *ngFor="let p of produtos">
       <a (click)="abrirProduto(p)" style="cursor:pointer;">
         
-          <div class=" card border-dark mb-3">
+          <div class="card border-dark mb-3 hvr-float">
             <img class="card-top" src="../../../../../arquivos/{{p.nomeArquivo}}" style="width: 200px; height: 200px;" />
             <div class="card-body">
               <div class="card-text">{{p.descricao | truncate: 50}}</div>
