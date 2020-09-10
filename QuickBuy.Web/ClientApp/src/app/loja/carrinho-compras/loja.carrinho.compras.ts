@@ -11,7 +11,7 @@ export class LojaCarrinhoCompras {
       //se ja existir um unico item armezanado na sessao
       this.produtos = JSON.parse(produtoLocalStorage);
       this.produtos.push(produto);
-      
+
     }
     localStorage.setItem("produtoLocalStorage", JSON.stringify(this.produtos));
   }

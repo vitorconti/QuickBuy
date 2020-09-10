@@ -39,7 +39,7 @@ export class NavMenuComponent implements OnInit {
   get usuario() {
     return this.usuarioServico.usuario;
   }
-  public temItensNoCarrinhoDeCompras() : boolean {
+  public temItensNoCarrinhoDeCompras(): boolean {
     return this.carrinhoCompras.temItensNoCarrinhoDeCompras();
   }
 }

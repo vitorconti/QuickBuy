@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TruncateModule} from 'ng2-truncate'
@@ -20,6 +20,7 @@ import { LojaDetalheProdutoComponent } from './loja/detalheproduto/loja.detalhe.
 import { LojaEfetivarComponent } from './loja/efetivar/loja.efetivar.component';
 import { PedidoServico } from './servicos/pedido/pedido.servico';
 import { LojaCompraRealizadaComponent } from './loja/efetivar/loja.compra.realizada.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,8 @@ import { LojaCompraRealizadaComponent } from './loja/efetivar/loja.compra.realiz
     HttpClientModule,
     FormsModule,
     TruncateModule,
+    CommonModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'produto', component: ProdutoComponent, canActivate:[GuardaRotas] },

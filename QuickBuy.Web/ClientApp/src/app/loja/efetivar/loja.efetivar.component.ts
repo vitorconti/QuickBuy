@@ -6,6 +6,7 @@ import { ItemPedido } from "../../modelo/itempedido";
 import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 import { PedidoServico } from "../../servicos/pedido/pedido.servico";
 import { Router } from "@angular/router";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 @Component({
   selector: "loja-efetivar",
   templateUrl: "./loja.efetivar.component.html",
@@ -15,13 +16,33 @@ export class LojaEfetivarComponent implements OnInit {
   public carrinhoCompras: LojaCarrinhoCompras;
   public produtos: Produto[];
   public total: number;
+  cadastroPedido: FormGroup;
+
   ngOnInit(): void {
     this.carrinhoCompras = new LojaCarrinhoCompras();
     this.produtos = this.carrinhoCompras.obterProdutos();
     this.atualizarTotal();
+    this.cadastroPedido = this.fb.group({
+      cep : ['', Validators.required],
+      cidade : ['', Validators.required],
+      enderecoCompleto : ['', Validators.required],
+      numeroEndereco : ['', Validators.required],
+      estado : ['', Validators.required],
+      formaPagamento : ['', Validators.required]
+    });
   }
-  constructor(private usuarioServico: UsuarioServico, private pedidoServico: PedidoServico, private router: Router) {
+  constructor(private usuarioServico: UsuarioServico,
+               private pedidoServico: PedidoServico, private router: Router,
+               private fb: FormBuilder ) {
 
+  }
+  public verificarCarrinho() {
+    const teste = this.carrinhoCompras.temItensNoCarrinhoDeCompras();
+    if (teste) {
+      return this.carrinhoCompras.temItensNoCarrinhoDeCompras();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
   public atualizarPreco(produto: Produto, quantidade: number) {
     if (!produto.precoOriginal)
@@ -31,18 +52,23 @@ export class LojaEfetivarComponent implements OnInit {
       quantidade = 1;
       produto.quantidade = quantidade;
     }
-      
+
     this.carrinhoCompras.atualizar(this.produtos);
     this.atualizarTotal();
   }
   public removerProduto(produto: Produto) {
     this.carrinhoCompras.removerProduto(produto);
     this.produtos = this.carrinhoCompras.obterProdutos();
-    this.atualizarTotal();
+
+    if (this.verificarCarrinho()) {
+      this.atualizarTotal();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
   public atualizarTotal() {
     //acc é o contador
-    this.total = this.produtos.reduce((acc, produto)=> acc+produto.preco,0);
+    this.total = this.produtos.reduce((acc, produto) => acc + produto.preco, 0);
   }
   public efetivarCompra() {
     this.pedidoServico.efetivarCompra(this.criarPedido())
@@ -59,7 +85,7 @@ export class LojaEfetivarComponent implements OnInit {
         })
   }
   public criarPedido(): Pedido {
-    let pedido = new Pedido();
+    const pedido = new Pedido();
     pedido.usuarioId = this.usuarioServico.usuario.id;
     pedido.cep = "15515";
     pedido.cidade = "Macaubal";
@@ -71,14 +97,15 @@ export class LojaEfetivarComponent implements OnInit {
 
     this.produtos = this.carrinhoCompras.obterProdutos();
     // esse laço serve para preencher a lista de itempedidos dentro da classe do pedido
-    for (let produto of this.produtos) {
-      let itemPedido = new ItemPedido();
+    for (const produto of this.produtos) {
+      const itemPedido = new ItemPedido();
       itemPedido.produtoId = produto.id;
-      if (!produto.quantidade)
+      if (!produto.quantidade) {
         produto.quantidade = 1;
+      }
       itemPedido.quantidade = produto.quantidade;
       pedido.itensPedido.push(itemPedido);
-      
+
     }
 
     return pedido;

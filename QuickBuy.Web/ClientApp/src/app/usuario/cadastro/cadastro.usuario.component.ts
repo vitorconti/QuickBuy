@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { Usuario } from "../../modelo/usuario"
 import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
+import { FormBuilder, FormGroup } from "@angular/forms";
 @Component({
   selector: "cadastro-usuario",
   templateUrl: "./cadastro.usuario.component.html",
@@ -11,6 +12,7 @@ export class CadastroUsuarioComponent implements OnInit {
   public ativar_spinner: boolean;
   public mensagem: string;
   public usuarioCadastrado: boolean;
+  public cadastroUsuario: FormGroup;
   constructor(private usuarioServico: UsuarioServico) {
 
   }
@@ -19,7 +21,7 @@ export class CadastroUsuarioComponent implements OnInit {
     this.usuario = new Usuario();
   }
   public cadastrar() {
-    
+
     this.ativar_spinner = true;
     this.usuarioServico.cadastrarUsuario(this.usuario)
       .subscribe(
@@ -36,8 +38,8 @@ export class CadastroUsuarioComponent implements OnInit {
           this.ativar_spinner = false;
         }
        );
-      
-      
+
+
   }
 
 }
